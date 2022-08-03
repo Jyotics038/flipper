@@ -6,7 +6,7 @@ const App = () => {
   return (
     <>
       <Navbar/>
-      <Mainarea/>
+      <Mainarea difficulty="4"/>
     </>
   )
 }
