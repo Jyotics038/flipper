@@ -13,9 +13,9 @@ const iconClass=["bi bi-alarm-fill",
 
 const Card = (props) => {
   return (
-    <div className="card col-3">
+    <div className="card col-3 ">
       <center>
-        <div className="card mx-2 my-3 py-2">
+        <div className="card mx-2 my-3 py-2 "onClick={()=>props.handleSelection(props.value)}>
         <h2>
           <i className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i>{props.value}
         </h2>
