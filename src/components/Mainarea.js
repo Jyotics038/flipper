@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import Timer from "./Timer";
 
 const Mainarea = (props) => {
   const { difficulty } = props;
@@ -16,6 +17,10 @@ const Mainarea = (props) => {
 
   //to give bg color to selected cards
   const [cardsColArr, setcardsColArr] = useState([]);
+
+  //for Timer
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     let tempCardArray = [];
@@ -117,27 +122,55 @@ const Mainarea = (props) => {
     }
   }, [selection2]);
 
+  const handleTimeIncrement = () => {
+    setSeconds((prevState) => prevState + 1);
+  };
+
+  //for timer
+  useEffect(() => {
+    if(seconds===60){
+       setSeconds(0);
+       setMinutes(prevState=>prevState + 1);
+    }
+  },[seconds]);
+
   return (
     <div className="container my-3">
       <h1 className="text-center">Flipper</h1>
-      <h3>Selection1:{selection1}</h3>
-      <h3>Selection2:{selection2}</h3>
-      <h3>totalFlips:{totalFlips}</h3>
-      <h3>remainingFlips:{remainingFlips}</h3>
-
-      <div className="row">
-        {cardArray.map((element) => {
-          return (
-            <Card
-              key={element}
-              value={element}
-              visible={revealedCardsArray[element]}
-              bgCol={cardsColArr[element]}
-              handleSelection={handleSelection}
-            />
-          );
-        })}
-      </div>
+      {remainingFlips > 0 ? (
+        <>
+          <div className="d-flex justify-content-between py-2">
+            <h4>Total Flips Made:{totalFlips}</h4>
+            <h4 className="d-flex align-items-center">
+              <Timer
+                minutes={minutes}
+                seconds={seconds}
+                incrementTime={handleTimeIncrement}
+              />
+            </h4 >
+            <h4>Flips Remaining:{remainingFlips}</h4>
+          </div>
+          <div className="row">
+            {cardArray.map((element) => {
+              return (
+                <Card
+                  key={element}
+                  value={element}
+                  visible={revealedCardsArray[element]}
+                  bgCol={cardsColArr[element]}
+                  handleSelection={handleSelection}
+                />
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <div className="my-4">
+          <h2 className="text-center">You win!</h2>
+          <h4 className="text-center">Total Flips Made: {totalFlips}</h4>
+          <h4 className="text-center">Total Time Taken:{minutes}:{seconds}</h4>
+        </div>
+      )}
     </div>
   );
 };

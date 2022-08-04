@@ -17,7 +17,7 @@ const Card = (props) => {
       <center>
         <div className={`card bg-${props.bgCol} mx-2 my-3 py-2 `}onClick={()=>props.handleSelection(props.value)}>
         <h2>
-          <i className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i>{props.value}
+          <i className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i>{props.value%8}
         </h2>
         </div>
         
