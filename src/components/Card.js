@@ -6,7 +6,7 @@ const iconClass=["bi bi-alarm-fill",
 "bi bi-bug-fill",
 "bi bi-chat-left-text-fill",
 "bi bi-constroller",
-"bi bi-git",
+"bi bi-emoji-laughing",
 "bi bi-code-slash",
 "bi bi-camera-reels-fill"
 ];
