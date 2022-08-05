@@ -4,10 +4,10 @@ import Timer from "./Timer";
 
 const Mainarea = (props) => {
   const theme = props.theme;
-
   
-
   const { difficulty } = props;
+  const modValue=difficulty*2;
+
   const [cardArray, setCardArray] = useState([]);
   const [revealedCardsArray, setRevealedCardsArray] = useState([]);
   const [selection1, setSelection1] = useState(null);
@@ -15,7 +15,7 @@ const Mainarea = (props) => {
 
   const [totalFlips, settotalFlips] = useState(0);
   const [remainingFlips, setremainingFlips] = useState(
-    (props.difficulty * props.difficulty) / 2
+    (difficulty*4) / 2
   );
   const [canSelect, setcanSelect] = useState(true);
 
@@ -28,7 +28,7 @@ const Mainarea = (props) => {
 
   useEffect(() => {
     let tempCardArray = [];
-    for (let i = 0; i < difficulty * difficulty; i++) {
+    for (let i = 0; i < difficulty * 4; i++) {
       tempCardArray.push(i);
     }
     
@@ -37,7 +37,7 @@ const Mainarea = (props) => {
     let revealedCards = [];
     let tempCardColArr = [];
 
-    for (let i = 0; i < difficulty * difficulty; i++) {
+    for (let i = 0; i < difficulty * 4; i++) {
       const randomIndex = Math.floor(Math.random() * tempCardArray.length);
       shuffleArray.push(tempCardArray[randomIndex]);
       tempCardArray.splice(randomIndex, 1);
@@ -98,7 +98,7 @@ const Mainarea = (props) => {
       let newCardColArr = { ...cardsColArr };
       newCardColArr[selection2] = "info";
       setcardsColArr(newCardColArr);
-      if (selection1 % 8 === selection2 % 8) {
+      if (selection1 % modValue === selection2 % modValue) {
         
         newCardColArr = { ...cardsColArr };
         newCardColArr[selection1] = "success";
@@ -167,6 +167,7 @@ const Mainarea = (props) => {
                   visible={revealedCardsArray[element]}
                   bgCol={cardsColArr[element]}
                   handleSelection={handleSelection}
+                  difficulty={difficulty}
                   theme={theme}
                 />
               );
