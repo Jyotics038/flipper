@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const Navbar = (props) => {
   return (
@@ -6,9 +7,9 @@ const Navbar = (props) => {
     <nav
       className={`navbar navbar-expand-lg navbar-${props.theme} bg-${props.theme}`}
     >
-      <a className="navbar-brand" href="/">
+      <Link className="navbar-brand" to="/">
         Flipper
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -24,9 +25,9 @@ const Navbar = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="/">
-              New Game <span class="sr-only">(current)</span>
-            </a>
+            <Link className="nav-link" to="/">
+              Home <span className="sr-only">(current)</span>
+            </Link>
           </li>
           <li className="nav-item">
             <a

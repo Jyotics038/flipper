@@ -5,11 +5,7 @@ import Timer from "./Timer";
 const Mainarea = (props) => {
   const theme = props.theme;
 
-  if (theme === "light") {
-    document.body.style.backgroundColor = "#fff";
-  } else {
-    document.body.style.backgroundColor = "#181818";
-  }
+  
 
   const { difficulty } = props;
   const [cardArray, setCardArray] = useState([]);
@@ -35,7 +31,7 @@ const Mainarea = (props) => {
     for (let i = 0; i < difficulty * difficulty; i++) {
       tempCardArray.push(i);
     }
-    console.log(tempCardArray);
+    
 
     let shuffleArray = [];
     let revealedCards = [];
@@ -48,16 +44,16 @@ const Mainarea = (props) => {
       revealedCards.push(false);
       tempCardColArr.push("light");
     }
-    console.log(shuffleArray);
+   
     setCardArray(shuffleArray);
     setRevealedCardsArray(revealedCards);
     setcardsColArr(tempCardColArr);
-    console.log(revealedCards);
+  
   }, []);
 
   const handleSelection = (value) => {
     if (canSelect) {
-      console.log("clicked", value);
+     
       if (selection1 === null) {
         setSelection1(value);
         let newVisibleCardsArray = revealedCardsArray;
@@ -87,7 +83,7 @@ const Mainarea = (props) => {
 
   //to handle change of selection1
   useEffect(() => {
-    console.log("Selection changed");
+    
     if (selection1 !== null) {
       let newCardColArr = { ...cardsColArr };
       newCardColArr[selection1] = "info";
@@ -103,7 +99,7 @@ const Mainarea = (props) => {
       newCardColArr[selection2] = "info";
       setcardsColArr(newCardColArr);
       if (selection1 % 8 === selection2 % 8) {
-        console.log("same");
+        
         newCardColArr = { ...cardsColArr };
         newCardColArr[selection1] = "success";
         newCardColArr[selection2] = "success";
@@ -111,7 +107,7 @@ const Mainarea = (props) => {
         handleReset();
         setremainingFlips((prevState) => prevState - 1);
       } else {
-        console.log("not same");
+      
         setcanSelect(false);
         newCardColArr = { ...cardsColArr };
         newCardColArr[selection1] = "danger";
