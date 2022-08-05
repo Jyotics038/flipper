@@ -3,6 +3,14 @@ import Card from "./Card";
 import Timer from "./Timer";
 
 const Mainarea = (props) => {
+  const theme = props.theme;
+
+  if (theme === "light") {
+    document.body.style.backgroundColor = "#fff";
+  } else {
+    document.body.style.backgroundColor = "#181818";
+  }
+
   const { difficulty } = props;
   const [cardArray, setCardArray] = useState([]);
   const [revealedCardsArray, setRevealedCardsArray] = useState([]);
@@ -128,27 +136,31 @@ const Mainarea = (props) => {
 
   //for timer
   useEffect(() => {
-    if(seconds===60){
-       setSeconds(0);
-       setMinutes(prevState=>prevState + 1);
+    if (seconds === 60) {
+      setSeconds(0);
+      setMinutes((prevState) => prevState + 1);
     }
-  },[seconds]);
+  }, [seconds]);
 
   return (
     <div className="container my-3">
-      <h1 className="text-center">Flipper</h1>
+      <h1
+        className={`text-center text-${theme === "light" ? "dark" : "light"}`}
+      >
+        Flipper
+      </h1>
       {remainingFlips > 0 ? (
         <>
           <div className="d-flex justify-content-between py-2">
-            <h4>Total Flips Made:{totalFlips}</h4>
-            <h4 className="d-flex align-items-center">
+            <h4 className={`text-${theme === "light" ? "dark" : "light"}`}>Total Flips Made:{totalFlips}</h4>
+            <h4 className={`d-flex align-items-center text-${theme === "light" ? "dark" : "light"}`}>
               <Timer
                 minutes={minutes}
                 seconds={seconds}
                 incrementTime={handleTimeIncrement}
               />
-            </h4 >
-            <h4>Flips Remaining:{remainingFlips}</h4>
+            </h4>
+            <h4 className={`d-flex align-items-center text-${theme === "light" ? "dark" : "light"}`}>Flips Remaining:{remainingFlips}</h4>
           </div>
           <div className="row">
             {cardArray.map((element) => {
@@ -159,6 +171,7 @@ const Mainarea = (props) => {
                   visible={revealedCardsArray[element]}
                   bgCol={cardsColArr[element]}
                   handleSelection={handleSelection}
+                  theme={theme}
                 />
               );
             })}
@@ -166,9 +179,11 @@ const Mainarea = (props) => {
         </>
       ) : (
         <div className="my-4">
-          <h2 className="text-center">You win!</h2>
-          <h4 className="text-center">Total Flips Made: {totalFlips}</h4>
-          <h4 className="text-center">Total Time Taken:{minutes}:{seconds}</h4>
+          <h2 className={`text-center text-${theme === "light" ? "dark" : "light"}`}>You win!</h2>
+          <h4 className={`text-center text-${theme === "light" ? "dark" : "light"}`}>Total Flips Made: {totalFlips}</h4>
+          <h4 className={`text-center text-${theme === "light" ? "dark" : "light"}`}>
+            Total Time Taken:{minutes}:{seconds}
+          </h4>
         </div>
       )}
     </div>

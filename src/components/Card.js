@@ -13,11 +13,12 @@ const iconClass=["bi bi-alarm-fill",
 
 const Card = (props) => {
   return (
-    <div className="card col-3 ">
+    <div className="col-3 ">
       <center>
-        <div className={`card bg-${props.bgCol} mx-2 my-3 py-2 `}onClick={()=>props.handleSelection(props.value)}>
-        <h2>
-          <i className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i>{props.value%8}
+        <div className={`card bg-${props.theme} mx-2 my-3 py-2 `}onClick={()=>props.handleSelection(props.value)}>
+        <h2 className={`text-${props.theme=== "light" ? "dark" : "light"}`}>
+          <i style={{color: props.bgCol==='success'?'green':props.bgCol==='danger'?'red':""}}
+          className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i>{props.value%8}
         </h2>
         </div>
         
